@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life coaching | Rael Rodriguez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="navy-band on-dark">
+  <div class="wrap">
+
+    <div class="nav">
+      <a class="nav-mark logo-chip" href="index.html">
+        <img src="assets/logo-rr-mark.png" alt="Rael Rodriguez" style="height: 30px; width: auto; display: block;">
+      </a>
+      <a class="nav-back" href="index.html" aria-label="Back to home"><img src="assets/logo-rr-mark.png" alt="" style="width: 20px; height: 20px; object-fit: contain;"></a>
+    </div>
+
+    <div class="hero">
+      <p class="eyebrow"><span class="n">&#9673;</span>Life coaching</p>
+      <h1>Your growth,<br><span class="accent">on purpose.</span></h1>
+      <p class="lede">One-on-one coaching for people who are done drifting and ready to get intentional about who they're becoming, not just what they're doing.</p>
+      <a class="btn-gold" href="#inquiry">Get in touch</a>
+    </div>
+  </div>
+</div>
+
+<div class="marquee">
+  <div class="marquee-track" style="animation-duration: 128s;">
+    <span>Clarity</span><span>Accountability</span><span>Direction</span><span>Habits</span><span>Momentum</span><span>Clarity</span><span>Accountability</span><span>Direction</span><span>Habits</span><span>Momentum</span><span>Clarity</span><span>Accountability</span><span>Direction</span><span>Habits</span><span>Momentum</span><span>Clarity</span><span>Accountability</span><span>Direction</span><span>Habits</span><span>Momentum</span><span>Clarity</span><span>Accountability</span><span>Direction</span><span>Habits</span><span>Momentum</span><span>Clarity</span><span>Accountability</span><span>Direction</span><span>Habits</span><span>Momentum</span><span>Clarity</span><span>Accountability</span><span>Direction</span><span>Habits</span><span>Momentum</span><span>Clarity</span><span>Accountability</span><span>Direction</span><span>Habits</span><span>Momentum</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="section" style="padding-bottom: 0;">
+    <div class="section-head"><h2>Why coaching, why now</h2></div>
+    <div class="feature-grid">
+      <div class="feature-card reveal" style="--stagger: 0s">
+        <p class="f-title">Built around you</p>
+        <p class="f-desc">No fixed curriculum. We start with where you actually are and build the plan from there.</p>
+      </div>
+      <div class="feature-card reveal" style="--stagger: 0.06s">
+        <p class="f-title">Direct, not soft</p>
+        <p class="f-desc">Honest feedback over comfortable agreement. Growth needs both, but it needs honesty first.</p>
+      </div>
+      <div class="feature-card reveal" style="--stagger: 0.12s">
+        <p class="f-title">Accountability that sticks</p>
+        <p class="f-desc">Between sessions, not just during them. Progress happens in the gaps.</p>
+      </div>
+      <div class="feature-card reveal" style="--stagger: 0.18s">
+        <p class="f-title">Small, intentional roster</p>
+        <p class="f-desc">A limited number of clients at a time, so every session gets real attention.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="process">
+    <div class="section-head"><h2>How it works</h2></div>
+    <div class="process-row reveal" style="--stagger: 0s">
+      <span class="process-num">01</span>
+      <div class="process-body">
+        <p class="p-title">Reach out</p>
+        <p class="p-desc">Fill out the inquiry below, or send a DM if that's easier.</p>
+      </div>
+    </div>
+    <div class="process-row reveal" style="--stagger: 0.08s">
+      <span class="process-num">02</span>
+      <div class="process-body">
+        <p class="p-title">Intro call</p>
+        <p class="p-desc">A short, no-pressure call to see if it's the right fit on both sides.</p>
+      </div>
+    </div>
+    <div class="process-row reveal" style="--stagger: 0.16s">
+      <span class="process-num">03</span>
+      <div class="process-body">
+        <p class="p-title">Begin coaching</p>
+        <p class="p-desc">We set a cadence that fits your life and start the real work.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-band reveal">
+    <blockquote>&ldquo;The goal isn't to hand you answers. It's to build the judgment so you stop needing to ask.&rdquo;</blockquote>
+    <cite>On how I coach</cite>
+  </div>
+
+  <!--
+    NETLIFY FORMS SETUP
+    This form is detected automatically at deploy time because it carries
+    data-netlify="true" and a name attribute. To receive an email on every
+    submission: Netlify dashboard -> Site settings -> Forms -> Form
+    notifications -> Add notification -> Email notification, pointed at
+    your inbox. No backend or API key needed.
+
+    Netlify's static form detection scans the built HTML, so if this page
+    is ever served through a JS framework instead of plain HTML, keep a
+    hidden static copy of this exact form (same name + fields) somewhere
+    in the built output so the build-time bot can still find it.
+  -->
+  <div id="inquiry" class="cta-band reveal">
+    <h2>Start an inquiry</h2>
+    <p class="cta-lede">Tell me a bit about what you're working on. I read every one of these myself.</p>
+    <form class="inquiry" name="coaching-inquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="coaching-inquiry">
+      <p style="display:none;">
+        <label>Don't fill this out if you're human: <input name="bot-field"></label>
+      </p>
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Email address" required>
+      <input type="tel" name="phone" placeholder="Phone (optional)" class="full">
+      <textarea name="message" placeholder="What are you looking to work on?" class="full" required></textarea>
+      <button class="btn-primary full" type="submit">Send inquiry</button>
+    </form>
+    <p class="alt-contact">Prefer to talk first? <a href="https://instagram.com/keepingit_rael" target="_blank" rel="noopener">DM me on Instagram</a> instead.</p>
+  </div>
+
+  <footer class="reveal">
+    <span>&copy; 2026 Rael Rodriguez</span>
+    <span class="foot-tag">Keeping it Rael</span>
+  </footer>
+</div>
+
+<script>
+  // Fades and lifts each .reveal element into place the first time it
+  // scrolls into view. Falls back to showing everything immediately if
+  // IntersectionObserver isn't available.
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in-view'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+</body>
+</html>
