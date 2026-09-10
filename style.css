@@ -466,6 +466,11 @@ form.inquiry textarea:focus {
   .live-badge.is-live .live-dot { animation: pulse 1.4s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 }
+.live-emblem { width: 34px; height: 34px; background: #171B1F; display: flex; align-items: center; justify-content: center; }
+.live-emblem-dot { width: 13px; height: 13px; border-radius: 50%; background: #FF3B30; display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .live-emblem-dot { animation: pulse 1.4s ease-in-out infinite; }
+}
 
 .platform-list { max-width: 460px; margin: 0 auto 88px; }
 .platform-row {
