@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Site Admin — Rael Rodriguez</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dawn-top: #0E141B;
+    --dawn-mid: #1C3346;
+    --gold: #C9822E;
+    --cream: #EDE7DA;
+    --ink: #171B1F;
+    --ink-soft: #565D63;
+    --line: rgba(23,27,31,0.12);
+    --bad: #C24444;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Manrope', sans-serif;
+    background: linear-gradient(180deg, var(--dawn-top), var(--dawn-mid));
+    color: var(--ink);
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 32px 20px 80px; }
+  .brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+  .brand-row img { height: 26px; width: auto; display: block; }
+  .brand-row span { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(251,243,231,0.75); }
+  h1 { font-family: 'Fraunces', serif; font-weight: 700; color: var(--cream); font-size: clamp(1.6rem, 5vw, 2.1rem); margin: 0 0 6px; }
+  .tag { color: rgba(251,243,231,0.75); font-size: 0.9rem; margin: 0 0 28px; }
+  .card { background: var(--cream); border-radius: 18px; padding: 24px; margin-bottom: 20px; box-shadow: 0 20px 50px -22px rgba(20,12,30,0.5); }
+  .card h2 { font-family: 'Fraunces', serif; font-size: 1.15rem; margin: 0 0 16px; }
+  label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--ink-soft); }
+  input {
+    width: 100%; font-family: 'Manrope', sans-serif; font-size: 0.98rem;
+    padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+    background: #fff; color: var(--ink); margin-bottom: 14px;
+  }
+  button {
+    font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 0.95rem;
+    padding: 11px 20px; border-radius: 10px; border: none; cursor: pointer;
+    background: var(--ink); color: var(--cream);
+  }
+  button.secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); font-weight: 600; }
+  #loginView { max-width: 380px; margin: 60px auto 0; }
+  .error { color: #ffd7d7; background: rgba(194,68,68,0.35); border-radius: 10px; padding: 10px 12px; font-size: 0.9rem; margin-bottom: 14px; display: none; }
+  .error.show { display: block; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  #panelView { display: none; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }
+  .tile { background: var(--cream); border-radius: 18px; padding: 22px; box-shadow: 0 20px 50px -22px rgba(20,12,30,0.5); text-decoration: none; color: var(--ink); display: block; transition: transform 0.15s ease; }
+  .tile:hover, .tile:focus-visible { transform: translateY(-2px); }
+  .tile-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin: 0 0 8px; }
+  .tile h3 { font-family: 'Fraunces', serif; font-size: 1.2rem; margin: 0 0 6px; }
+  .tile p { font-size: 0.88rem; color: var(--ink-soft); margin: 0; line-height: 1.4; }
+  .muted { color: var(--ink-soft); font-size: 0.85rem; }
+  .sub-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .sub-item { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .sub-item .sub-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .sub-name { font-weight: 700; }
+  .sub-stamp { font-size: 0.76rem; color: var(--ink-soft); white-space: nowrap; }
+  .sub-field { font-size: 0.88rem; margin: 2px 0; }
+  .sub-field strong { color: var(--ink-soft); font-weight: 600; margin-right: 6px; }
+  .refresh-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="loginView">
+    <div class="brand-row"><img src="../assets/logo-rr-mark.png" alt=""><span>Rael Rodriguez</span></div>
+    <h1>Site Admin</h1>
+    <p class="tag">Enter the site password to continue.</p>
+    <div class="card">
+      <div class="error" id="loginError"></div>
+      <label for="passwordInput">Password</label>
+      <input type="password" id="passwordInput" autocomplete="current-password">
+      <button id="loginBtn">Log in</button>
+    </div>
+  </div>
+
+  <div id="panelView">
+    <div class="brand-row"><img src="../assets/logo-rr-mark.png" alt=""><span>Rael Rodriguez</span></div>
+    <div class="topbar">
+      <div>
+        <h1>Site Admin</h1>
+        <p class="tag">Controls for raelrodriguez.com.</p>
+      </div>
+      <button class="secondary" id="logoutBtn">Log out</button>
+    </div>
+
+    <div class="tiles">
+      <a class="tile" href="/tracker/admin">
+        <p class="tile-eyebrow">The Climb</p>
+        <h3>Income Tracker</h3>
+        <p>Log entries, manage categories, and review the audit trail at /tracker.</p>
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="refresh-row">
+        <h2 style="margin:0;">Coaching inquiries</h2>
+        <button class="secondary" id="refreshSubs">Refresh</button>
+      </div>
+      <p class="muted" style="margin:-8px 0 16px;">Submissions from the coaching page's inquiry form, newest first.</p>
+      <div class="error" id="subsError"></div>
+      <ul class="sub-list" id="subsList"></ul>
+      <p class="muted" id="subsEmpty" style="display:none;">No inquiries yet.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const TOKEN_KEY = 'site_admin_token';
+
+  function getToken() { return localStorage.getItem(TOKEN_KEY); }
+  function setToken(t) { localStorage.setItem(TOKEN_KEY, t); }
+  function clearToken() { localStorage.removeItem(TOKEN_KEY); }
+
+  async function authedFetch(url, options = {}) {
+    const headers = Object.assign({}, options.headers, { Authorization: 'Bearer ' + getToken() });
+    const res = await fetch(url, Object.assign({}, options, { headers }));
+    if (res.status === 401) {
+      clearToken();
+      showLogin('Your session expired. Log in again.');
+      throw new Error('Not authorized');
+    }
+    return res;
+  }
+
+  function showLogin(message) {
+    document.getElementById('loginView').style.display = 'block';
+    document.getElementById('panelView').style.display = 'none';
+    const err = document.getElementById('loginError');
+    if (message) { err.textContent = message; err.classList.add('show'); }
+    else { err.classList.remove('show'); }
+  }
+
+  function showPanel() {
+    document.getElementById('loginView').style.display = 'none';
+    document.getElementById('panelView').style.display = 'block';
+    loadSubmissions();
+  }
+
+  document.getElementById('loginBtn').addEventListener('click', async () => {
+    const password = document.getElementById('passwordInput').value;
+    const err = document.getElementById('loginError');
+    err.classList.remove('show');
+    try {
+      const res = await fetch('/api/admin-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Login failed');
+      setToken(data.token);
+      showPanel();
+    } catch (e) {
+      err.textContent = e.message;
+      err.classList.add('show');
+    }
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    clearToken();
+    showLogin();
+  });
+
+  document.getElementById('refreshSubs').addEventListener('click', loadSubmissions);
+
+  function subsErr(message) {
+    const el = document.getElementById('subsError');
+    if (!message) { el.classList.remove('show'); return; }
+    el.textContent = message;
+    el.classList.add('show');
+  }
+
+  function formatStamp(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' +
+      d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
+
+  async function loadSubmissions() {
+    const list = document.getElementById('subsList');
+    const empty = document.getElementById('subsEmpty');
+    try {
+      const res = await authedFetch('/api/admin-forms');
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Could not load submissions');
+      subsErr(null);
+
+      list.innerHTML = '';
+      if (!data.submissions.length) { empty.style.display = 'block'; return; }
+      empty.style.display = 'none';
+
+      data.submissions.forEach((s) => {
+        const li = document.createElement('li');
+        li.className = 'sub-item';
+        const fields = s.data || {};
+        li.innerHTML =
+          '<div class="sub-top"><span class="sub-name">' + escapeHtml(fields.name || 'Unknown') +
+          '</span><span class="sub-stamp">' + formatStamp(s.createdAt) + '</span></div>' +
+          (fields.email ? '<div class="sub-field"><strong>Email</strong>' + escapeHtml(fields.email) + '</div>' : '') +
+          (fields.phone ? '<div class="sub-field"><strong>Phone</strong>' + escapeHtml(fields.phone) + '</div>' : '') +
+          (fields.message ? '<div class="sub-field"><strong>Message</strong>' + escapeHtml(fields.message) + '</div>' : '');
+        list.appendChild(li);
+      });
+    } catch (e) {
+      if (e.message !== 'Not authorized') subsErr(e.message);
+    }
+  }
+
+  // ---------- Boot ----------
+  if (getToken()) {
+    showPanel();
+  } else {
+    showLogin();
+  }
+</script>
+</body>
+</html>

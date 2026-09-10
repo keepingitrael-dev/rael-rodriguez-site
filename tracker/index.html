@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Climb — $500K, Tracked in Public</title>
+<meta name="description" content="Live public progress toward a $500,000 income goal. Total, pace, and ranked income sources, updated automatically.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dawn-top: #0E141B;
+    --dawn-mid: #1C3346;
+    --dawn-low: #5A4128;
+    --dawn-glow: #C9822E;
+    --gold: #C9822E;
+    --cream: #EDE7DA;
+    --ink: #171B1F;
+    --ink-soft: #565D63;
+    --live-green: #33D17E;
+    --card-border: rgba(23, 27, 31, 0.08);
+    --max-width: 720px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Manrope', sans-serif;
+    color: var(--cream);
+    background: linear-gradient(180deg, var(--dawn-top) 0%, var(--dawn-mid) 42%, var(--dawn-low) 78%, var(--dawn-glow) 100%);
+    background-attachment: fixed;
+  }
+  a { color: inherit; }
+  main { max-width: var(--max-width); margin: 0 auto; padding: 28px 20px 64px; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 36px; }
+  .brand { font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(251, 243, 231, 0.85); }
+  .live { display: inline-flex; align-items: center; gap: 7px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; color: rgba(251, 243, 231, 0.9); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--live-green); box-shadow: 0 0 0 0 rgba(51, 209, 126, 0.6); animation: pulse 2.2s ease-out infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(51, 209, 126, 0.55); } 70% { box-shadow: 0 0 0 8px rgba(51, 209, 126, 0); } 100% { box-shadow: 0 0 0 0 rgba(51, 209, 126, 0); } }
+  @media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
+  .hero { margin-bottom: 32px; }
+  .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin: 0 0 14px; }
+  h1.headline { font-family: 'Fraunces', serif; font-optical-sizing: auto; font-weight: 600; font-size: clamp(2.1rem, 6vw, 3.4rem); line-height: 1.06; margin: 0 0 14px; color: var(--cream); }
+  .sub { font-size: 1.02rem; line-height: 1.55; color: rgba(251, 243, 231, 0.82); margin: 0; max-width: 46ch; }
+  .card { background: rgba(251, 243, 231, 0.97); border: 1px solid var(--card-border); border-radius: 22px; padding: 30px 28px; color: var(--ink); box-shadow: 0 24px 60px -24px rgba(20, 12, 30, 0.55); }
+  .progress-card { margin-bottom: 22px; position: relative; }
+  .totals-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+  .total-figure { font-family: 'Fraunces', serif; font-weight: 700; font-size: clamp(2.6rem, 9vw, 4rem); line-height: 1; letter-spacing: -0.01em; }
+  .total-figure .currency { opacity: 0.55; font-weight: 500; margin-right: 2px; }
+  .goal-line { font-size: 0.95rem; color: var(--ink-soft); margin-top: 6px; }
+  .goal-line strong { color: var(--ink); }
+  .percentage-badge { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 1.05rem; background: linear-gradient(135deg, var(--gold), var(--dawn-low)); color: var(--ink); padding: 8px 16px; border-radius: 999px; white-space: nowrap; }
+  .horizon-track { position: relative; height: 20px; border-radius: 999px; background: rgba(34, 26, 48, 0.08); overflow: hidden; margin-bottom: 8px; }
+  .horizon-fill { position: relative; height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, var(--dawn-top) 0%, var(--dawn-mid) 35%, var(--dawn-low) 70%, var(--gold) 100%); transition: width 1s cubic-bezier(0.22, 1, 0.36, 1); }
+  .sun { position: absolute; right: -9px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 5px rgba(201, 130, 46, 0.28), 0 0 18px 4px rgba(201, 130, 46, 0.55); animation: sunPulse 1.8s ease-in-out infinite; }
+  @keyframes sunPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 5px rgba(201, 130, 46, 0.28), 0 0 18px 4px rgba(201, 130, 46, 0.55); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 7px rgba(201, 130, 46, 0.16), 0 0 26px 8px rgba(201, 130, 46, 0.3); }
+  }
+  @media (prefers-reduced-motion: reduce) { .sun { animation: none; } }
+  .track-labels { display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft); margin-bottom: 20px; }
+  .pace { font-size: 0.98rem; line-height: 1.5; background: rgba(201, 130, 46, 0.14); border-radius: 14px; padding: 14px 16px; color: var(--ink); }
+  .pace strong { font-family: 'Fraunces', serif; font-weight: 700; }
+  .sources-card h2 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.5rem; margin: 0 0 6px; }
+  .sources-note { font-size: 0.9rem; color: var(--ink-soft); margin: 0 0 20px; line-height: 1.5; }
+  .rank-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .rank-list li { display: flex; align-items: center; gap: 14px; padding: 13px 16px; background: rgba(34, 26, 48, 0.04); border-radius: 12px; }
+  .rank-num { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.1rem; color: var(--dawn-low); min-width: 1.4em; }
+  .rank-name { font-weight: 600; font-size: 1rem; }
+  .footer { margin-top: 36px; text-align: center; font-size: 0.85rem; color: rgba(251, 243, 231, 0.65); line-height: 1.6; }
+  .socials { display: flex; justify-content: center; gap: 14px; margin-top: 18px; }
+  .social-link { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: rgba(237, 231, 218, 0.08); color: var(--cream); transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+  .social-link svg { width: 18px; height: 18px; }
+  .social-link:hover, .social-link:focus-visible { background: var(--gold); color: var(--ink); transform: translateY(-2px); }
+  .status-line { font-size: 0.85rem; color: var(--ink-soft); text-align: center; margin-top: 4px; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  @media (max-width: 480px) { .card { padding: 24px 20px; border-radius: 18px; } .totals-row { align-items: flex-start; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="topbar">
+    <div class="brand">Keepingit_Rael</div>
+    <div class="live"><span class="dot" aria-hidden="true"></span><span id="liveLabel">Live</span></div>
+  </div>
+
+  <section class="hero">
+    <p class="eyebrow">Year one of five &middot; the $5M climb</p>
+    <h1 class="headline">Every dollar,<br>tracked in the open.</h1>
+    <p class="sub">This page updates automatically. No exact figures per source, ever, just the honest total, the pace, and the order of what's actually pulling weight.</p>
+  </section>
+
+  <section class="card progress-card" aria-labelledby="progressHeading">
+    <h2 id="progressHeading" class="visually-hidden">Progress toward goal</h2>
+    <div class="totals-row">
+      <div>
+        <div class="total-figure"><span class="currency">$</span><span id="totalAmount">&mdash;</span></div>
+        <div class="goal-line">of <strong id="goalAmount">&mdash;</strong> goal</div>
+      </div>
+      <div class="percentage-badge" id="percentageBadge">&mdash;%</div>
+    </div>
+
+    <div class="horizon-track" role="img" aria-label="Progress bar toward the goal">
+      <div class="horizon-fill" id="horizonFill"><div class="sun" aria-hidden="true"></div></div>
+    </div>
+    <div class="track-labels">
+      <span id="startDateLabel">Aug 1, 2026</span>
+      <span id="targetDateLabel">Aug 1, 2027</span>
+    </div>
+
+    <p class="pace" id="paceLine">Calculating pace&hellip;</p>
+  </section>
+
+  <section class="card sources-card" aria-labelledby="sourcesHeading">
+    <h2 id="sourcesHeading">Income sources, ranked</h2>
+    <p class="sources-note">Highest to lowest, order only. No dollar amounts or percentages live here, so the ranking can't be worked backward into real numbers.</p>
+    <ol class="rank-list" id="rankList"></ol>
+  </section>
+
+  <p class="status-line" id="statusLine" role="status" aria-live="polite"></p>
+
+  <footer class="footer">
+    <p>Get it together &rarr; Get it, together &rarr; Give it away.<br>Follow the climb below.</p>
+    <div class="socials">
+      <a class="social-link" href="https://www.instagram.com/keepingit_rael/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect>
+          <circle cx="12" cy="12" r="4.8"></circle>
+          <circle cx="17.4" cy="6.6" r="0.9" fill="currentColor" stroke="none"></circle>
+        </svg>
+      </a>
+      <a class="social-link" href="https://www.youtube.com/@keepingit_rael" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <rect x="2" y="5" width="20" height="14" rx="4"></rect>
+          <path d="M10 9l6 3-6 3z" fill="currentColor" stroke="none"></path>
+        </svg>
+      </a>
+      <a class="social-link" href="https://www.tiktok.com/@keepingit_rael" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M16.5 2c.4 2.2 2 3.8 4.2 4.1v3.1c-1.5-.1-2.9-.6-4.1-1.4v6.6a6.1 6.1 0 1 1-6.1-6.1c.3 0 .6 0 .9.1v3.2a3 3 0 1 0 2.1 2.9V2h3z"></path>
+        </svg>
+      </a>
+      <a class="social-link" href="https://www.twitch.tv/keepingit_rael" target="_blank" rel="noopener noreferrer" aria-label="Twitch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d="M4 3h16v11l-4 4h-4l-3 3v-3H4z"></path>
+          <line x1="12" y1="7" x2="12" y2="12"></line>
+          <line x1="16.5" y1="7" x2="16.5" y2="11"></line>
+        </svg>
+      </a>
+    </div>
+  </footer>
+</main>
+
+<script>
+  const numberFmt = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
+
+  async function loadProgress() {
+    const statusLine = document.getElementById('statusLine');
+    try {
+      const res = await fetch('/api/public-data', { cache: 'no-store' });
+      if (!res.ok) throw new Error('Request failed');
+      const data = await res.json();
+      render(data);
+      statusLine.textContent = '';
+    } catch (err) {
+      statusLine.textContent = 'Progress data is temporarily unavailable. Checking again shortly.';
+    }
+  }
+
+  function render(data) {
+    document.getElementById('totalAmount').textContent = numberFmt.format(data.total);
+    document.getElementById('goalAmount').textContent = '$' + numberFmt.format(data.goal);
+    document.getElementById('percentageBadge').textContent = data.percentage.toFixed(1) + '%';
+
+    const pct = Math.max(0, Math.min(100, data.percentage));
+    document.getElementById('horizonFill').style.width = pct + '%';
+
+    document.getElementById('targetDateLabel').textContent = data.pace.targetDate;
+
+    document.getElementById('paceLine').innerHTML =
+      'At the current pace, this lands around <strong>$' +
+      numberFmt.format(data.pace.projectedTotal) +
+      '</strong> by ' + data.pace.targetDate + '.';
+
+    const list = document.getElementById('rankList');
+    list.innerHTML = '';
+    data.rankedCategories.forEach((name, i) => {
+      const li = document.createElement('li');
+      const num = document.createElement('span');
+      num.className = 'rank-num';
+      num.textContent = String(i + 1);
+      const label = document.createElement('span');
+      label.className = 'rank-name';
+      label.textContent = name;
+      li.appendChild(num);
+      li.appendChild(label);
+      list.appendChild(li);
+    });
+  }
+
+  loadProgress();
+  setInterval(loadProgress, 45000);
+</script>
+</body>
+</html>
