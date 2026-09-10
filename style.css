@@ -551,10 +551,14 @@ footer .foot-tag {
 .channel-card .c-label { font-family: var(--font-display); font-size: 18px; font-weight: 500; }
 .channel-card .c-desc { font-size: 13px; color: rgba(24, 38, 66, 0.72); margin-top: 4px; line-height: 1.55; }
 .channel-card .c-arrow { align-self: flex-end; font-size: 16px; color: var(--navy-800); opacity: 0.5; }
-.channel-card.g1 { background: var(--gold-100); }
-.channel-card.g2 { background: var(--gold-400); }
-.channel-card.g3 { background: var(--gold-500); }
-.channel-card.g4 { background: var(--gold-600); }
+.channel-card.g1 { background: #F2E4C8; }
+.channel-card.g2 { background: #E8D6B2; }
+.channel-card.g3 { background: #DDC89C; }
+.channel-card.g4 { background: #D3BA86; }
+.channel-card.g5 { background: #C8AB71; }
+.channel-card.g6 { background: #BE9D5B; }
+.channel-card.g7 { background: #B38F45; }
+.channel-card.g8 { background: #A9812F; }
 
 .feature-links { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-direction: column; gap: 10px; }
 .skill-tag {
