@@ -175,7 +175,7 @@ a { color: inherit; }
   flex-shrink: 0;
   overflow: hidden;
 }
-.headshot img { width: 100%; height: 100%; object-fit: cover; }
+.headshot img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 .identity-row .name {
   font-family: var(--font-display);
   font-size: 30px;
